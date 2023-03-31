@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mediguru</title><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#speechToTextButton").click(function(){
+          const speechConfig = SpeechSDK.SpeechConfig.fromSubscription("7a6b1fff5d2c4f18a2f99579a6d773d9", "centralindia");
+          const recognizer = new SpeechSDK.SpeechRecognizer(speechConfig);
+          recognizer.recognizeOnceAsync(
+            result => {
+              $("#outputText").val(result.text);
+              recognizer.close();
+            },
+          );
+        });
+      });
+    </script>
+  </head>
+  <body bgcolor="B0DAFF" id="textbody">
+    <br><br>
+    <h1><font face = "Verdana" size = "7">Speech-to-Text using Azure</font></h1> <br><br>
+    <button id="speechToTextButton">Click to Speak</button>
+    <br><br><br><br>
+    <label for="outputText"><font face = "Verdana" size = "3">Output Text:</font></label> <br><br>
+    <textarea id="outputText" rows="4" cols="50"></textarea>
+    <footer id="footer">
+      <p>&copy; 2023 Team Doberman. Ananth-Inas-Sathyaa</p>
+    </footer>
+    <style>
+    #textbody{
+      text-align: center;
+    }
+    #footer {
+      position:absolute;
+      bottom: 0;
+      width: 100%;
+      height: 2.5rem;
+    }</style>
+
+  </body>
+</html>
